@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>DeFiPulse</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    
+    <ProjectReference Include="..\DeFiPulse.Domain\DeFiPulse.Domain.csproj" />
+    <ProjectReference Include="..\DeFiPulse.Application.Contracts\DeFiPulse.Application.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AElf.Client" Version="1.2.1" />
+    <PackageReference Include="AElf.Types" Version="1.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.6" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="6.0.3" />
+    <PackageReference Include="Google.Protobuf" Version="3.25.2" />
+    <PackageReference Include="Grpc.Tools" Version="2.61.0" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Protobuf\Proto" />
+  </ItemGroup>
+  <ItemGroup>
+    <Protobuf Include="Protobuf/Proto/*.proto" BeforeTargets="BeforeBuild">
+      <GrpcServices>none</GrpcServices>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <GrpcOutputDir>./Protobuf/Generated</GrpcOutputDir>
+      <OutputDir>./Protobuf/Generated</OutputDir>
+      <ProtoRoot>Protobuf/Proto</ProtoRoot>
+    </Protobuf>
+  </ItemGroup>
+</Project>
